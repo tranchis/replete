@@ -157,4 +157,5 @@
     goog.structs.TreeNode
     goog.structs.Trie
     goog.structs.weak
-    goog.text.LoremIpsum))
+    goog.text.LoremIpsum
+    quil.core))

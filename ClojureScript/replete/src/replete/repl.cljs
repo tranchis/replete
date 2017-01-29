@@ -293,11 +293,17 @@
         (cb nil))
       (cb nil))))
 
+(defn- do-load-foreign
+  [file-path cb]
+  (cb {:lang :js
+       :source (js/REPLETE_LOAD file-path)}))
+
 (defn load [{:keys [name macros path] :as full} cb]
   (cond
     (skip-load? full) (cb {:lang   :js
                            :source ""})
     (re-matches #"^goog/.*" path) (do-load-goog name cb)
+    (= name 'org.processingjs.Processing) (do-load-foreign "processing.js" cb)
     :else (loop [extensions (if macros
                               [".clj" ".cljc"]
                               [".cljs" ".cljc" ".js"])]

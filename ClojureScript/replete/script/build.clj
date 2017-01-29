@@ -33,6 +33,7 @@
 (copy-source "clojure/template.clj")
 (copy-source "cljs/core/async/macros.cljc")
 (copy-source "cljs/core/async/impl/ioc_macros.clj")
+(copy-source "quil/sketch.clj")
 
 (let [res (io/resource "cljs/core.cljs.cache.aot.edn")
       cache (read-string (slurp res))]
