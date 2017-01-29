@@ -8,11 +8,23 @@
 
 import UIKit
 
+/* 
+ Idea is to add a play/pause button and a "fullscreen" button
+ would enable user interaction on the javascript context with
+ some predefined gesture to exit out of fullscreen.
+ 
+ Also want to refine gestures so that there's acceleration, bounce
+ back when going past the edge, hiding when you deliberately flick
+ pas edge, toggleable visibility, adjustable size/aspect ratio.
+ */
+
 class CanvasViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var canvasView: EJJavaScriptView!
     var lastPoint: CGPoint = CGPoint(x: 0, y: 0)
     var lastScale: CGFloat = 0.0
+    // maybe the canvas should actually be the full window height
+    // pixel-wise, just scaled down initially?
     var initialSize: CGSize = CGSize(width: 60, height: 80)
 
     override func loadView() {
