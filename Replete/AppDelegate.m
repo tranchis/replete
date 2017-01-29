@@ -54,7 +54,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
 - (void)initializeJavaScriptEnvironment {
+    [self initializeJavaScriptEnvironmentWithContext:JSGlobalContextCreate(NULL)];
+}
+
+
+- (void)initializeJavaScriptEnvironmentWithContext:(JSGlobalContextRef)ctx {
     
     NSString *outPath = [[NSBundle mainBundle] pathForResource:@"out" ofType:nil];
     NSURL* outURL = [NSURL URLWithString:outPath];
@@ -62,7 +68,7 @@
     NSURL* srcURL = [[AppDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"src/" isDirectory:YES];
     NSString* srcPath = srcURL.path;
     
-    self.contextManager = [[ABYContextManager alloc] initWithContext:JSGlobalContextCreate(NULL)
+    self.contextManager = [[ABYContextManager alloc] initWithContext:ctx
                                              compilerOutputDirectory:outURL];
     [self.contextManager setUpConsoleLog];
     [self.contextManager setupGlobalContext];
@@ -71,6 +77,8 @@
     
     NSString* mainJsFilePath = [[outURL URLByAppendingPathComponent:@"main" isDirectory:NO]
                                 URLByAppendingPathExtension:@"js"].path;
+    
+    NSLog(@"Main js file path: %@", mainJsFilePath);
     
     NSURL* googDirectory = [outURL URLByAppendingPathComponent:@"goog"];
     

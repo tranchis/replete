@@ -7,6 +7,7 @@ let textViewMaxHeight: (portrait: CGFloat, landscape: CGFloat) = (portrait: 272,
 class ReplViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     
     let history: History
+    var canvas: CanvasViewController
     var tableView: UITableView!
     var toolBar: UIToolbar!
     var textView: UITextView!
@@ -68,6 +69,7 @@ class ReplViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     required init?(coder aDecoder: NSCoder) {
         self.history = History()
+        self.canvas = CanvasViewController()
         
         super.init(nibName: nil, bundle: nil)
         
@@ -101,6 +103,8 @@ class ReplViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.separatorStyle = .none
         view.addSubview(tableView)
         
+        view.addSubview(self.canvas.view)
+        
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         notificationCenter.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -114,6 +118,7 @@ class ReplViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         
+        
         DispatchQueue.main.async {
             self.loadMessage(false, text:"\nClojureScript " + appDelegate.getClojureScriptVersion() + "\n" +
             "    Docs: (doc function-name)\n" +
@@ -126,7 +131,8 @@ class ReplViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSLog("Initializing...");
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.initializeJavaScriptEnvironment()
+            
+            appDelegate.initializeJavaScriptEnvironment(with: self.canvas.jsContext())
             
             DispatchQueue.main.async {
                 // mark ready

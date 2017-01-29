@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AAB9E16E1E3DBEDB00B54741 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB9E16D1E3DBEDB00B54741 /* CanvasViewController.swift */; };
 		D337F432BB780C5200016AB5 /* libPods-Replete.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8079AE72457AB83298C66DE8 /* libPods-Replete.a */; };
 		ED06DC271B3F62E800100331 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED06DC261B3F62E800100331 /* main.m */; };
 		ED06DC2A1B3F62E800100331 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED06DC291B3F62E800100331 /* AppDelegate.m */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		8079AE72457AB83298C66DE8 /* libPods-Replete.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Replete.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		862FF9D73679E32EBC06CE75 /* Pods-Replete.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Replete.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Replete/Pods-Replete.debug.xcconfig"; sourceTree = "<group>"; };
+		AAB9E16D1E3DBEDB00B54741 /* CanvasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
 		D3F59975D0B14E3EFBE74C07 /* Pods-Replete.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Replete.release.xcconfig"; path = "Pods/Target Support Files/Pods-Replete/Pods-Replete.release.xcconfig"; sourceTree = "<group>"; };
 		ED06DC211B3F62E800100331 /* Replete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Replete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED06DC251B3F62E800100331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				EDE7D6CA1B3F79AB00710B50 /* out */,
 				ED06DC281B3F62E800100331 /* AppDelegate.h */,
 				ED06DC291B3F62E800100331 /* AppDelegate.m */,
+				AAB9E16D1E3DBEDB00B54741 /* CanvasViewController.swift */,
 				ED93310B1B4013F0004B09FD /* ReplViewController.swift */,
 				ED93310D1B401411004B09FD /* HistoryTableViewCell.swift */,
 				ED9331111B40151A004B09FD /* History.swift */,
@@ -316,6 +319,7 @@
 				ED93310C1B4013F0004B09FD /* ReplViewController.swift in Sources */,
 				ED06DC2A1B3F62E800100331 /* AppDelegate.m in Sources */,
 				ED9331141B40151A004B09FD /* Message.swift in Sources */,
+				AAB9E16E1E3DBEDB00B54741 /* CanvasViewController.swift in Sources */,
 				ED06DC271B3F62E800100331 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
