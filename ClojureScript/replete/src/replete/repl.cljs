@@ -231,15 +231,19 @@
 (defn- source-callback-data [path extension]
   (when-let [source (js/REPLETE_LOAD (str path extension))]
     ;; Emit a diagnostic if loading source
-    #_(when-not (= ".js" extension)
+    (when-not (= ".js" extension)
       (prn "Warning: loading non-AOT source" path extension))
     {:lang   (extension->lang extension)
      :source source}))
+
+(declare inject-replete-eval)
 
 (defn load-and-callback! [path extension macros cb]
   (when-let [cb-data (or (pre-compiled-callaback-data (str path (when macros "$macros")) extension)
                          (source-callback-data path extension))]
     (cb cb-data)
+    (when (and (= name 'cljs.spec.test) macros)
+      (inject-replete-eval 'cljs.spec.test$macros))
     :loaded))
 
 (defn- closure-index
@@ -752,3 +756,15 @@
 (defn- resolve
   [sym]
   (ns-resolve @current-ns sym))
+
+(defn- intern
+  ([ns name]
+   (when-let [the-ns (find-ns (cond-> ns (instance? Namespace ns) ns-name))]
+     (eval `(def ~name) (ns-name the-ns))))
+  ([ns name val]
+   (when-let [the-ns (find-ns (cond-> ns (instance? Namespace ns) ns-name))]
+     (eval `(def ~name ~val) (ns-name the-ns)))))
+
+(defn- inject-replete-eval
+  [target-ns]
+  (intern target-ns 'eval eval))
