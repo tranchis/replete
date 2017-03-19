@@ -231,14 +231,14 @@
 (defn- source-callback-data [path extension]
   (when-let [source (js/REPLETE_LOAD (str path extension))]
     ;; Emit a diagnostic if loading source
-    (when-not (= ".js" extension)
+    #_(when-not (= ".js" extension)
       (prn "Warning: loading non-AOT source" path extension))
     {:lang   (extension->lang extension)
      :source source}))
 
 (declare inject-replete-eval)
 
-(defn load-and-callback! [path extension macros cb]
+(defn load-and-callback! [name path extension macros cb]
   (when-let [cb-data (or (pre-compiled-callaback-data (str path (when macros "$macros")) extension)
                          (source-callback-data path extension))]
     (cb cb-data)
@@ -294,7 +294,7 @@
     (cb {:lang   :js
          :source ""})
     (if-let [goog-path (get (closure-index-mem) name)]
-      (when-not (load-and-callback! goog-path ".js" false cb)
+      (when-not (load-and-callback! name goog-path ".js" false cb)
         (cb nil))
       (cb nil))))
 
@@ -307,7 +307,7 @@
                               [".clj" ".cljc"]
                               [".cljs" ".cljc" ".js"])]
             (if extensions
-              (when-not (load-and-callback! path (first extensions) macros cb)
+              (when-not (load-and-callback! name path (first extensions) macros cb)
                 (recur (next extensions)))
               (cb nil)))))
 
