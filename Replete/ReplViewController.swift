@@ -33,7 +33,7 @@ class ReplViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 textView.textContainerInset = UIEdgeInsetsMake(6, 3, 6, 3)
                 textView.autocorrectionType = UITextAutocorrectionType.no;
                 textView.autocapitalizationType = UITextAutocapitalizationType.none;
-                textView.keyboardType = UIKeyboardType.ASCIICapable;
+                textView.keyboardType = UIKeyboardType.asciiCapable;
                 textView.delegate = self
                 toolBar.addSubview(textView)
                 
@@ -208,7 +208,7 @@ class ReplViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let currentText = textView.text
         if (range.location > 0 &&
             text == " " &&
-            currentText?.substring(with: currentText!.index(currentText!.startIndex, offsetBy: range.location-1)..<currentText!.index(currentText!.startIndex, offsetBy: range.location-1)) == " ") {
+            currentText?.substring(with: currentText!.index(currentText!.startIndex, offsetBy: range.location-1)..<currentText!.index(currentText!.startIndex, offsetBy: range.location)) == " ") {
             textView.text = (textView.text as NSString).replacingCharacters(in: range, with: " ")
             textView.selectedRange = NSMakeRange(range.location+1, 0);
             return false;
